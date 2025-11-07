@@ -9,8 +9,15 @@ require('dotenv').config();
 const app = express();
 
 //middelewares
+app.use(helmet());
 app.use(cors());
+app.use(morgan('combined'));
+
 app.use(bodyparser.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.use(morgan('combined'));
 
 app.get('/api/health', (req, res) => {
   res.json({ 

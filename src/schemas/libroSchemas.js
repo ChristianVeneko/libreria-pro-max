@@ -3,7 +3,7 @@ const Joi = require('joi');
 const libroSchemas = {
     //schema para crear un libro
     create: Joi.object({
-        titulo_libro: joi.string()
+        titulo_libro: Joi.string()
         .max(200)
         .required()
         .messages({

@@ -34,7 +34,7 @@ const validateParams = (schema) => {
     };
 };
 
-modole.exports = {
+module.exports = {
     validateRequest,
     validateParams,
-};
+}

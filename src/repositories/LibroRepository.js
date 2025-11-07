@@ -7,7 +7,7 @@ class LibroRepository {
     async findAll(filters = {}) {
         try {
             let query = `
-            SELECT DISTINC
+            SELECT DISTINCT
             l.cod_libro,
             l.titulo_libro,
             l.volumen,
@@ -108,7 +108,7 @@ class LibroRepository {
             const cod_libro = result.insertId;
 
             //si hay autores, insertar la relacion
-            if (autores && autores.lenght > 0) {
+            if (autores && autores.length > 0) {
                 for (const ced_autor of autores) {
                     await connection.query(
                         'INSERT INTO autor_libro (ced_autor, cod_libro) VALUES (?, ?)',
@@ -163,7 +163,7 @@ class LibroRepository {
             }
 
             //solo actualizar si hay campos
-            if (updateFields.lenght > 0) {
+            if (updateFields.length > 0) {
                 updateValues.push(cod_libro);
                 await connection.query(
                     `UPDATE libro SET ${updateFields.join(', ')} WHERE cod_libro = ?`,

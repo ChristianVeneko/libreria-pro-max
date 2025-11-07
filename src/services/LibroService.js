@@ -2,7 +2,7 @@ const LibroRepository = require('../repositories/LibroRepository');
 
 class LibroService {
     //obtener todos los libros
-    async getAllBooks(filters) {
+    async getAllLibros(filters) {
         try{
             const libros = await LibroRepository.findAll(filters);
         return {
@@ -15,3 +15,5 @@ class LibroService {
         }
     }
 }
+
+module.exports = new LibroService();

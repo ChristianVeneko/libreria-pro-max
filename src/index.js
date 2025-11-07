@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const errorHandler = require('./middleware/errorHandler');
 const libroRoutes = require('./routes/libroRoutes');
 const bodyparser = require('body-parser');
 const connection = require('./config/db');
@@ -25,10 +26,25 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Library API');
 })
 
+app.use('*', (req, res) => {
+  res.status(404).json({
+    status: 'error',
+    message: 'Ruta no encontrada',
+  });
+});
 
 
-
+app.use(errorHandler);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
+  console.log(`
+╔════════════════════════════════════════════╗
+║  📚 Biblioteca API ejecutándose            ║
+║  Puerto: ${PORT}                              ║
+║  Ambiente: ${process.env.NODE_ENV}                       ║
+║  URL: http://localhost:${PORT}                ║
+╚════════════════════════════════════════════╝
+  `);
 });
+
+module.exports = app;
